@@ -15,12 +15,12 @@ with open("./config.json", "r") as f:
 if(config == None):
     print("config.json is not found.")
 
-chrome_driver = config["driver_path"]
-userID = config["userID"]
 
+chrome_driver = config["driver_path"]
 chrome_service = service.Service(executable_path=chrome_driver)
 browser = webdriver.Chrome(service=chrome_service)
 
+userID = config["userID"]
 algoURL = f"https://atcoder.jp/users/{userID}?contestType=algo"
 heuristicURL = f"https://atcoder.jp/users/{userID}?contestType=heuristic"
 
@@ -42,15 +42,13 @@ try:
 except:
     pass
 
-browser.implicitly_wait(10)
+
 browser.get(algoURL)
 time.sleep(3)
-
 
 get_canvas("ratingStatus", "./tmp/1.png")
 get_canvas("ratingGraph", "./tmp/2.png")
 
-browser.implicitly_wait(10)
 browser.get(heuristicURL)
 time.sleep(3)
 
@@ -80,10 +78,10 @@ img2 = Image.open("./tmp/2.png")
 img3 = Image.open("./tmp/3.png")
 img4 = Image.open("./tmp/4.png")
 
-img5 = get_concat_v(img1, img2)
-img6 = get_concat_v(img3, img4)
-img7 = get_concat_h(img5, img6)
-img7.save("result/result.png")
+algo = get_concat_v(img1, img2)
+heu = get_concat_v(img3, img4)
+res = get_concat_h(algo, heu)
+res.save("result/result.png")
 
 shutil.rmtree("./tmp")
 browser.quit()
