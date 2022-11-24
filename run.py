@@ -118,7 +118,7 @@ clip_heu = get_concat_v(clip_heu_status, clip_heu_graph)
 get_concat_h(algo, heu).save("result/status_graph.png")
 get_concat_h(clip_algo, clip_heu).save("result/status_graph_clip.png")
 get_concat_h(algo_graph, heu_graph).save("result/graph.png")
-get_concat_h(clip_algo_graph, clip_algo_graph).save("result/graph_clip.png")
+get_concat_h(clip_algo_graph, clip_heu_graph).save("result/graph_clip.png")
 
 shutil.rmtree("./tmp")
 browser.quit()
