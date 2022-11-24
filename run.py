@@ -76,7 +76,7 @@ def get_concat_h(im1, im2):
         width = im1.height*3
         dst = Image.new('RGBA', (width, im1.height), (255, 255, 255))
         dst.paste(im1, (int((width/2 - im1.width)/2), 0), im1)
-        dst.paste(im2, (width - (int((width/2 - im1.width)/2) + im1.width, 0)), im2)
+        dst.paste(im2, (width - (int((width/2 - im1.width)/2) + im1.width), 0), im2)
     return dst
 
 
