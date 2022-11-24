@@ -90,8 +90,13 @@ def get_concat_v(im1, im2):
 
 
 # 表の外側を切り取る
-def clip_image(img):
-    res = img.crop((82, 0, img.width, img.height-55))
+def clip_left(img):
+    res = img.crop((int(img.width*0.064), 0, img.width, img.height))
+    return res
+
+
+def clip_under(img):
+    res = img.crop((0, 0, img.width, int(img.height*0.923)))
     return res
 
 
@@ -100,23 +105,20 @@ algo_graph = Image.open("./tmp/2.png")
 heu_status = Image.open("./tmp/3.png")
 heu_graph = Image.open("./tmp/4.png")
 
-# statusアリ
 algo = get_concat_v(algo_status, algo_graph)
+clip_algo_status = clip_left(algo_status)
+clip_algo_graph = clip_left(clip_under(algo_graph))
+clip_algo = get_concat_v(clip_algo_status, clip_algo_graph)
+
 heu = get_concat_v(heu_status, heu_graph)
-res = get_concat_h(algo, heu)
-res.save("result/status_graph.png")
-res_clip = get_concat_h(clip_image(algo), clip_image(heu))
-res_clip.save("result/status_graph_clip.png")
+clip_heu_status = clip_left(heu_status)
+clip_heu_graph = clip_left(clip_under(heu_graph))
+clip_heu = get_concat_v(clip_heu_status, clip_heu_graph)
 
-
-# statusナシ
-algo = algo_graph
-heu = heu_graph
-res = get_concat_h(algo, heu)
-res.save("result/graph.png")
-res_clip = get_concat_h(clip_image(algo), clip_image(heu))
-res_clip.save("result/graph_clip.png")
-
+get_concat_h(algo, heu).save("result/status_graph.png")
+get_concat_h(clip_algo, clip_heu).save("result/status_graph_clip.png")
+get_concat_h(algo_graph, heu_graph).save("result/graph.png")
+get_concat_h(clip_algo_graph, clip_algo_graph).save("result/graph_clip.png")
 
 shutil.rmtree("./tmp")
 browser.quit()
