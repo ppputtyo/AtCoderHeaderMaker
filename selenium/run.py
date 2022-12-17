@@ -31,8 +31,8 @@ def driver_init():
 browser = driver_init()
 
 userID = config["userID"]
-algoURL = f"https://atcoder.jp/users/{userID}?contestType=algo"
-heuristicURL = f"https://atcoder.jp/users/{userID}?contestType=heuristic"
+algoURL = f"https://atcoder.jp/users/{userID}?contestType=algo&lang=ja"
+heuristicURL = f"https://atcoder.jp/users/{userID}?contestType=heuristic&lang=ja"
 
 
 # canvas要素を画像に変換
