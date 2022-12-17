@@ -23,5 +23,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: res1
-          path: result/graph_clip
+          path: result/graph_clip.png
 
