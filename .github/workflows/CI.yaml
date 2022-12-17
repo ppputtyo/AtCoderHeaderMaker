@@ -2,7 +2,7 @@ name: selenium-github-actions
 on:
   push:
     branches:
-      - gh-action
+      - master
 jobs:
   selenium:
     runs-on: ubuntu-latest
