@@ -18,6 +18,7 @@ jobs:
         run: |
           pip install get-chrome-driver --upgrade
           pip install -r selenium/requirements.txt
+          sudo apt install fonts-ipafont-gothic
           python selenium/run.py
       - name: Archive results
         uses: actions/upload-artifact@v3
