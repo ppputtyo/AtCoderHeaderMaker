@@ -1,8 +1,5 @@
 name: selenium-github-actions
-on:
-  push:
-    branches:
-      - master
+on: push
 jobs:
   selenium:
     runs-on: ubuntu-latest
