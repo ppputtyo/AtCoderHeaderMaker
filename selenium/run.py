@@ -1,6 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome import service
 from get_chrome_driver import GetChromeDriver
 import base64
 import json
@@ -10,14 +9,14 @@ import shutil
 import sys
 from PIL import Image
 
+# load confing.json
 config = None
 try:
     with open("./config.json", "r") as f:
         config = json.load(f)
 except:
-    print("Error: Run init.py first", file=sys.stderr)
+    print("Not found error: config.json", file=sys.stderr)
     exit(1)
-
 
 get_driver = GetChromeDriver()
 get_driver.install()
@@ -39,7 +38,13 @@ heuristicURL = f"https://atcoder.jp/users/{userID}?contestType=heuristic"
 # canvas要素を画像に変換
 def get_canvas(id, out):
     global browser
-    canvas_first = browser.find_element(by=By.ID, value=id)
+    try:
+        canvas_first = browser.find_element(by=By.ID, value=id)
+    except:
+        print("Invalid username", file=sys.stderr)
+        browser.quit()
+        exit(1)
+
     dataURLs = browser.execute_script("return arguments[0].toDataURL('image/png').substring(21);",
                                       canvas_first)
     first_png = base64.b64decode(dataURLs)
