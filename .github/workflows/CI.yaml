@@ -1,0 +1,27 @@
+name: selenium-github-actions
+on:
+  push:
+    branches:
+      - master
+jobs:
+  selenium:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup Python3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+          architecture: "x64"
+      - name: Run
+        run: |
+          pip install get-chrome-driver --upgrade
+          pip install -r selenium/requirements.txt
+          python selenium/run.py
+      - name: Archive results
+        uses: actions/upload-artifact@v3
+        with:
+          name: result
+          path: result
+

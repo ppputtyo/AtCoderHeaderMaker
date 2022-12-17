@@ -30,7 +30,13 @@ heuristicURL = f"https://atcoder.jp/users/{userID}?contestType=heuristic"
 # canvas要素を画像に変換
 def get_canvas(id, out):
     global browser
-    canvas_first = browser.find_element(by=By.ID, value=id)
+    try:
+        canvas_first = browser.find_element(by=By.ID, value=id)
+    except:
+        print("Invalid username", file=sys.stderr)
+        browser.quit()
+        exit(1)
+
     dataURLs = browser.execute_script("return arguments[0].toDataURL('image/png').substring(21);",
                                       canvas_first)
     first_png = base64.b64decode(dataURLs)
@@ -89,12 +95,13 @@ def get_concat_v(im1, im2):
     return dst
 
 
-# 表の外側を切り取る
+# 左側を切り取る
 def clip_left(img):
     res = img.crop((int(img.width*0.064), 0, img.width, img.height))
     return res
 
 
+# 下側を切り取る
 def clip_under(img):
     res = img.crop((0, 0, img.width, int(img.height*0.923)))
     return res
