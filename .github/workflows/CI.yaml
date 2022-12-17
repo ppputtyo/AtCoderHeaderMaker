@@ -1,0 +1,19 @@
+name: selenium-github-actions
+on:
+  push:
+    branches:
+      - gh-action
+jobs:
+  selenium:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+          architecture: "x64"
+      - run: |
+          pip install get-chrome-driver --upgrade
+          pip install -r selenium/requirements.txt
+
+          python selenium/run.py
