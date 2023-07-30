@@ -1,5 +1,5 @@
 name: selenium-github-actions
-on: push
+on: [push, workflow_dispatch]
 jobs:
   selenium:
     runs-on: ubuntu-latest
@@ -16,7 +16,7 @@ jobs:
           pip install get-chrome-driver --upgrade
           pip install -r selenium/requirements.txt
           sudo apt install fonts-ipafont-gothic
-          python selenium/run.py
+          python selenium/run.py --userID ${{secrets.USER_ID}}
       - name: Archive results
         uses: actions/upload-artifact@v3
         with:
