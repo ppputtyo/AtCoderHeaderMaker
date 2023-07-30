@@ -15,15 +15,6 @@ parser.add_argument("--userID", help="AtCoder userID")
 
 userID = parser.parse_args().userID
 
-# load confing.json
-# config = None
-# try:
-#     with open("./config.json", "r") as f:
-#         config = json.load(f)
-# except:
-#     print("Not found error: config.json", file=sys.stderr)
-#     exit(1)
-
 get_driver = GetChromeDriver()
 get_driver.install()
 
@@ -36,7 +27,6 @@ def driver_init():
 
 browser = driver_init()
 
-# userID = config["userID"]
 algoURL = f"https://atcoder.jp/users/{userID}?contestType=algo&lang=ja"
 heuristicURL = f"https://atcoder.jp/users/{userID}?contestType=heuristic&lang=ja"
 
